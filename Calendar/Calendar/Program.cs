@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Calendar
         static void Main(string[] args)
         {
             bool wrongInput = false;
-            Month calendarMonth;
+            Month calendarMonth=null;
             do
             {
                 try
@@ -27,6 +28,8 @@ namespace Calendar
                 }
 
             } while (wrongInput);
+            var artist = new CalendarArtist(calendarMonth);
+            artist.CreateImage();
         }
 
         static Month DateParse(string stringDate)
