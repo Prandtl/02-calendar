@@ -41,8 +41,10 @@ namespace Calendar
 
         private void DrawDates(Graphics g,int xStart,int yStart)
         {
-
-            var dates = Enumerable.Repeat(0, (int) month.FirstDay - 1)
+            int toSkipOnFirstWeek = (int) month.FirstDay == 0
+                ? 6
+                : (int) month.FirstDay - 1;
+            var dates = Enumerable.Repeat(0, toSkipOnFirstWeek)
                 .Concat(Enumerable.Range(1, month.AmountOfDays)).ToArray();//todo:добавляет слишком много нулей в начале
             if (month.DaysOnLastWeek > 0)
                 dates=dates.Concat(Enumerable.Repeat(0, 7 - month.DaysOnLastWeek)).ToArray();
