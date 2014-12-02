@@ -57,11 +57,14 @@ namespace Calendar
             {
                 for (int j = 0; j < weeks[i].Length; j++)
                 {
-                    if(weeks[i][j]==0)
+                    if (weeks[i][j] == 0)
                         continue;
-                    g.DrawString(weeks[i][j].ToString(), daysFont, simpleBlackBrush, xStart+j*65, yStart+i*35);
+                    g.DrawString(weeks[i][j].ToString(), daysFont, simpleBlackBrush, xStart + j*65, yStart + i*35);
+                    if (month.InputDay.Day == weeks[i][j])
+                        g.DrawRectangle(new Pen(Color.DarkRed, 3), xStart + j*65, yStart + i*35, 69, 37);
                 }
             }
+
         }
 
         private Bitmap calendarPage;
