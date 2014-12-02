@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calendar
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            bool wrongInput = false;
+            bool wrongInput;
             Month calendarMonth=null;
             do
             {
@@ -35,7 +31,7 @@ namespace Calendar
         static Month DateParse(string stringDate)
         {
             var e = stringDate.Split('.')
-                .Select(x => int.Parse(x))
+                .Select(int.Parse)
                 .ToArray();
             if (e.Length!=3)
                 throw new ArgumentException("Wrong date format.");

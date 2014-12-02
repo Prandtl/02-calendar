@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 
 namespace Calendar
@@ -15,7 +13,7 @@ namespace Calendar
             this.month = month;
         }
 
-        public void CreateImage()//todo refactor
+        public void CreateImage()
         {
             height = 120 + 35*month.AmountOfWeeks;
             width = 500;
@@ -24,19 +22,27 @@ namespace Calendar
 
             var g = Graphics.FromImage(calendarPage);
 
-            g.DrawString(monthNames[month.InputDay.Month], monthNameFont, new SolidBrush(Color.Black), 5, 5);
-            g.DrawString(month.InputDay.Year.ToString(), yearFont, new SolidBrush(Color.Black), width - 80, 60);
-
-            int start = width - 70*7;
-            foreach (var name in daysHeadNames)
-            {
-                g.DrawString(name,daysHeadFont,new SolidBrush(Color.Black),start,85 );
-                start += 65;
-            }
-            
+            DrawCalendarHead(g);
+            DrawDayNames(g, width - 7*70, 80);
             DrawDates(g,10,120);
 
             calendarPage.Save("page.bmp");
+        }
+
+        private void DrawCalendarHead(Graphics g)
+        {
+            g.DrawString(monthNames[month.InputDay.Month], monthNameFont, new SolidBrush(Color.Black), 5, 5);
+            g.DrawString(month.InputDay.Year.ToString(), yearFont, new SolidBrush(Color.Black), width - 80, 60);
+        }
+
+        private void DrawDayNames(Graphics g,int xStart,int yStart)
+        {
+            int start = xStart;
+            foreach (var name in daysHeadNames)
+            {
+                g.DrawString(name, daysHeadFont, new SolidBrush(Color.Black), start, yStart);
+                start += 65;
+            }
         }
 
         private void DrawDates(Graphics g,int xStart,int yStart)
@@ -45,7 +51,7 @@ namespace Calendar
                 ? 6
                 : (int) month.FirstDay - 1;
             var dates = Enumerable.Repeat(0, toSkipOnFirstWeek)
-                .Concat(Enumerable.Range(1, month.AmountOfDays)).ToArray();//todo:добавляет слишком много нулей в начале
+                .Concat(Enumerable.Range(1, month.AmountOfDays)).ToArray();
             if (month.DaysOnLastWeek > 0)
                 dates=dates.Concat(Enumerable.Repeat(0, 7 - month.DaysOnLastWeek)).ToArray();
             var weeks = dates.Select((x, i) => Tuple.Create(x, i/7))
@@ -81,7 +87,7 @@ namespace Calendar
 
         private Brush simpleBlackBrush=new SolidBrush(Color.Black);
 
-        private Dictionary<int, string> monthNames = new Dictionary<int, string>()
+        private Dictionary<int, string> monthNames = new Dictionary<int, string>
         {
             {1,"January"},
             {2,"February"},
@@ -97,6 +103,6 @@ namespace Calendar
             {12,"December"}
         };
 
-        private List<string> daysHeadNames = new List<string>() {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
+        private List<string> daysHeadNames = new List<string> {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
     }
 }
