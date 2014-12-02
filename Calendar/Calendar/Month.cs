@@ -21,13 +21,17 @@ namespace Calendar
             AmountOfDays = cal.GetDaysInMonth(year, month);
             int firstDay = (int) FirstDay - 1;
             int daysWithoutFirstWeek = AmountOfDays - (7 - firstDay);
-            DaysOnLastWeek = daysWithoutFirstWeek % 7;
+            DaysOnLastWeek = daysWithoutFirstWeek%7;
             AmountOfWeeks = DaysOnLastWeek == 0
                 ? daysWithoutFirstWeek/7 + 1
                 : daysWithoutFirstWeek/7 + 2;
             FirstWeekNumber = cal.GetWeekOfYear(first,
                 DateTimeFormatInfo.CurrentInfo.CalendarWeekRule,
                 DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
+        }
+
+        public Month(DateTime date) : this(date.Day, date.Month, date.Year)
+        {
         }
 
 

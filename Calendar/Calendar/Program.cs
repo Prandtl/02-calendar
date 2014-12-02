@@ -7,24 +7,16 @@ namespace Calendar
     {
         static void Main()
         {
-            bool wrongInput;
-            Month calendarMonth=null;
-            do
+            Console.WriteLine("Input a date in mm.dd.yyyy format.");
+            string input = Console.ReadLine();
+            DateTime output;
+            while (!DateTime.TryParse(input,out output))
             {
-                try
-                {
-                    wrongInput = false;
-                    Console.WriteLine("Input a date in dd.mm.yyyy format.");
-                    calendarMonth = DateParse(Console.ReadLine());
-                }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine(e.Message);
-                    wrongInput = true;
-                }
+                Console.WriteLine("Wrong date format.");
+                input = Console.ReadLine();
+            }
 
-            } while (wrongInput);
-            var artist = new CalendarArtist(calendarMonth);
+            var artist = new CalendarArtist(new Month(output));
             artist.CreateImage();
         }
 
