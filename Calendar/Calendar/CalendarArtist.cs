@@ -31,8 +31,8 @@ namespace Calendar
 
         private void DrawCalendarHead(Graphics g)
         {
-            g.DrawString(monthNames[month.InputDay.Month], monthNameFont, new SolidBrush(Color.Black), 5, 5);
-            g.DrawString(month.InputDay.Year.ToString(), yearFont, new SolidBrush(Color.Black), width - 80, 60);
+            g.DrawString(monthNames[month.InputDay.Month], monthNameFont, simpleBlackBrush, 5, 5);
+            g.DrawString(month.InputDay.Year.ToString(), yearFont, simpleBlackBrush, width - 80, 60);
         }
 
         private void DrawDayNames(Graphics g,int xStart,int yStart)
@@ -40,7 +40,7 @@ namespace Calendar
             int start = xStart;
             foreach (var name in daysHeadNames)
             {
-                g.DrawString(name, daysHeadFont, new SolidBrush(Color.Black), start, yStart);
+                g.DrawString(name, daysHeadFont, simpleBlackBrush, start, yStart);
                 start += 65;
             }
         }
@@ -80,14 +80,14 @@ namespace Calendar
         private int width = 500;
         private int height = 90 + 35*6;
 
-        private Font monthNameFont = new Font(FontFamily.GenericMonospace, 50, FontStyle.Bold);
-        private Font yearFont = new Font(FontFamily.GenericSansSerif, 20);
-        private Font daysHeadFont = new Font(FontFamily.GenericMonospace, 30);
-        private Font daysFont = new Font(FontFamily.GenericMonospace, 30);
+        private readonly Font monthNameFont = new Font(FontFamily.GenericMonospace, 50, FontStyle.Bold);
+        private readonly Font yearFont = new Font(FontFamily.GenericSansSerif, 20);
+        private readonly Font daysHeadFont = new Font(FontFamily.GenericMonospace, 30);
+        private readonly Font daysFont = new Font(FontFamily.GenericMonospace, 30);
 
-        private Brush simpleBlackBrush=new SolidBrush(Color.Black);
+        private readonly Brush simpleBlackBrush=new SolidBrush(Color.Black);
 
-        private Dictionary<int, string> monthNames = new Dictionary<int, string>
+        private readonly Dictionary<int, string> monthNames = new Dictionary<int, string>
         {
             {1,"January"},
             {2,"February"},
@@ -103,6 +103,6 @@ namespace Calendar
             {12,"December"}
         };
 
-        private List<string> daysHeadNames = new List<string> {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
+        private readonly List<string> daysHeadNames = new List<string> {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
     }
 }

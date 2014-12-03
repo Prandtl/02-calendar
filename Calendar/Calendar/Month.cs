@@ -5,7 +5,6 @@ namespace Calendar
 {
     class Month
     {
-        public int FirstWeekNumber { get; private set; }
         public int AmountOfWeeks { get; private set; }
         public int AmountOfDays { get; private set; }
         public int DaysOnLastWeek { get; private set; }
@@ -25,9 +24,6 @@ namespace Calendar
             AmountOfWeeks = DaysOnLastWeek == 0
                 ? daysWithoutFirstWeek/7 + 1
                 : daysWithoutFirstWeek/7 + 2;
-            FirstWeekNumber = cal.GetWeekOfYear(first,
-                DateTimeFormatInfo.CurrentInfo.CalendarWeekRule,
-                DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek);
         }
 
         public Month(DateTime date) : this(date.Day, date.Month, date.Year)
