@@ -10,6 +10,11 @@ namespace Calendar
 
         public CalendarArtist(Month month)
         {
+            SetMonth(month);
+        }
+
+        public void SetMonth(Month month)
+        {
             this.month = month;
         }
 

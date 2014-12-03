@@ -21,9 +21,7 @@ namespace Calendar
             int firstDay = (int) FirstDay - 1;
             int daysWithoutFirstWeek = AmountOfDays - (7 - firstDay);
             DaysOnLastWeek = daysWithoutFirstWeek%7;
-            AmountOfWeeks = DaysOnLastWeek == 0
-                ? daysWithoutFirstWeek/7 + 1
-                : daysWithoutFirstWeek/7 + 2;
+            AmountOfWeeks = daysWithoutFirstWeek/7 + (DaysOnLastWeek == 0 ? 1 : 2);
         }
 
         public Month(DateTime date) : this(date.Day, date.Month, date.Year)
