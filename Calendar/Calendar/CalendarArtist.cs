@@ -31,7 +31,7 @@ namespace Calendar
             DrawDayNames(g, width - 7*70, 80);
             DrawDates(g,10,120);
 
-            calendarPage.Save("page.bmp");
+            calendarPage.Save("page" + month.InputDay.Day + month.InputDay.Month + month.InputDay.Year + ".bmp");
         }
 
         private void DrawCalendarHead(Graphics g)
